@@ -1,0 +1,1 @@
+// action 对象的type变量
