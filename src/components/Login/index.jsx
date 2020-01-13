@@ -3,7 +3,9 @@ import logo from './logo.png';
 import { Form, Icon, Input, Button ,message} from 'antd';
 import axios from 'axios';
 import './index.less';
+import {reqLogin} from '../../Api/index';
 const { Item } = Form;
+
 // 文档 https://ant.design/components/form-cn/#components-form-demo-dynamic-rule
 @Form.create() // 定义修饰器 用Form.create高阶组件出来Login
 class Login extends Component {
@@ -29,7 +31,9 @@ class Login extends Component {
       if(!err){
         // 表单校验成功 拿到表单值
         const {username,password} = values;
-        // 发送axios请求
+        console.log(username,password)
+        //#region 
+/*         // 发送axios请求
         axios.post('/api/login',{username,password})
         .then((responese)=>{
           console.log(responese.data.msg);
@@ -50,6 +54,14 @@ class Login extends Component {
           message.error('网错错误，请重新登录');
           // 清空密码
           this.props.form.resetFields(['password']);
+        }) */
+        //#endregion
+        reqLogin(username,password)
+        .then((response)=>{
+          console.log('登录成功');
+        })
+        .catch((err)=>{
+          message.error(err);
         })
       } 
     })
