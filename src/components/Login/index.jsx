@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import logo from './logo.png';
 import { Form, Icon, Input, Button ,message} from 'antd';
-import axios from 'axios';
 import './index.less';
-import {reqLogin} from '../../Api/index';
+import { connect } from 'react-redux';
+import { saveUserAsync } from '../../redux/actions';
 const { Item } = Form;
 
 // 文档 https://ant.design/components/form-cn/#components-form-demo-dynamic-rule
+@connect(null,{
+  saveUserAsync
+})
 @Form.create() // 定义修饰器 用Form.create高阶组件出来Login
 class Login extends Component {
   validator = (rule, value, callback) => {
@@ -31,7 +34,6 @@ class Login extends Component {
       if(!err){
         // 表单校验成功 拿到表单值
         const {username,password} = values;
-        console.log(username,password)
         //#region 
 /*         // 发送axios请求
         axios.post('/api/login',{username,password})
@@ -56,11 +58,14 @@ class Login extends Component {
           this.props.form.resetFields(['password']);
         }) */
         //#endregion
-        reqLogin(username,password)
-        .then((response)=>{
-          console.log('登录成功');
+       
+      // 获取请求函数的返回值 返回的是一个promise对象 
+        const result = this.props.saveUserAsync(username,password);
+        result
+        .then(()=>{ // 登录成功跳转
+          this.props.history.replace('/');
         })
-        .catch((err)=>{
+        .catch(err=>{ // 登录失败输出错误
           message.error(err);
         })
       } 

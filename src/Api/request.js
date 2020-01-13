@@ -28,7 +28,7 @@
   })
 
   // 请求拦截器
-  axiosInstance.interceptors.request.use(config => { // 请求成功的回调函数 config为请求载体
+  axiosInstance.interceptors.request.use(config => { // 请求成功的回调函数 config为请求报文的内容
     // 如果需要token令牌 则给请求头设置属性 authorization  值为 Bearer token
     let token = ''
     if (token) {
@@ -47,7 +47,7 @@
       },'').slice(1);
       config.headers['content-type'] = 'application/x-www-form-urlencoded';
     }
-    return config;
+    return config; // 返回请求报文 发送请求
   })
 
   // 响应拦截器
@@ -69,15 +69,18 @@
     */
       // 初始化错误原因
       let errMsg = ''
-      if(err.response){
+      if(err.response){ // 如果接收到返回报文 但是响应失败
+        // 根据返回的状态码 写入错误原因
         errMsg = errCode[err.response.status];
       }else{
+        // 如果没有返回报文 则根据浏览器报错关键字决定错误原因
         if(err.message.indexOf('Network Error')!==-1){
           errMsg = '网络故障，请重启网络';
         }else if(err.message.indexOf('timeout' !== -1)){
           errMsg = '网络请求超时，请检查网络'
         }
       }
+      // 如果无法判断错误原因 则是服务器原因
       return Promise.reject(errMsg || '发送未知错误,请联系管理员');
     }
   )
