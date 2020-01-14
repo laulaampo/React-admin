@@ -16,6 +16,7 @@ class BasicLayout extends React.Component {
     isShow:true
   };
 
+  // 收缩侧边栏函数
   onCollapse = collapsed => {
     const { isShow } = this.state;
     this.setState({ collapsed, isShow:!isShow });
