@@ -3,8 +3,8 @@ import { Button, Icon,Modal } from 'antd';
 import screenfull from 'screenfull';
 import './index.less';
 import {connect} from 'react-redux';
-import {removeItem} from '../../utils/storage';
-import {removeUser} from '../../redux/actions';
+import {removeItem} from '../../../utils/storage';
+import {removeUser} from '../../../redux/actions';
 import { withRouter } from 'react-router-dom';
 
 // 引入redux中 user的username(如果没登入则不获取) 以及登出的方法
