@@ -1,0 +1,43 @@
+.header-main{
+  height: 80px;
+  .header-top{
+    height: 50px;
+    text-align: right;
+    .sayHi{
+      margin: 0 5px;
+    }
+    button{
+      margin: 0 5px;
+    }
+  }
+  .header-bottom{
+    height: 30px;
+    border-top: 1px solid #1DA57A;
+    display: flex;
+    line-height: 30px;
+    .bottom-left{
+      position: relative;
+      flex: 1;
+      text-align: center;
+      font-weight: bold;
+      font-size: 20px;
+      color: #000;
+      &::before{
+        content:'';
+        border-top:15px solid #fff;
+        border-bottom:15px solid transparent;
+        border-left:15px solid transparent;
+        border-right:15px solid transparent;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -30px;
+      }
+    }
+    .bottom-right{
+      flex: 2;
+      text-align: right;
+      margin-right: 12px;
+    }
+  }
+}

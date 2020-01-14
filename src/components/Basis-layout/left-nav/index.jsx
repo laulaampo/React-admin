@@ -41,9 +41,7 @@ const { SubMenu, Item } = Menu;
   findOpenKey = (menus,pathname)=>{
     const menu = menus.find(menu=>{ 
        if(menu.children){ // 进入二级菜单内
-       return  menu.children.find((cMenu)=>{
-         return cMenu.path === pathname
-       })
+       return  menu.children.find((cMenu)=>cMenu.path === pathname)
       }
     })
     if(menu){ // 如果找到了 返回这个path
