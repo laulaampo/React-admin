@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
-import logo from './logo.png';
+import logo from '../../asset/img/logo.png';
 import { Form, Icon, Input, Button ,message} from 'antd';
 import './index.less';
 import { connect } from 'react-redux';
 import { saveUserAsync } from '../../redux/actions';
+import withCheckLogin from '../../containers/With-checkLogin';
+
 const { Item } = Form;
 
 // 文档 https://ant.design/components/form-cn/#components-form-demo-dynamic-rule
+@withCheckLogin
 @connect(null,{
   saveUserAsync
 })

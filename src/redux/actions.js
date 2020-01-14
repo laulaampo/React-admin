@@ -1,6 +1,6 @@
 // 存储 action 对象的工厂函数集合
 import {setItem} from '../utils/storage';
-import {reqLogin} from '../Api/index';
+import {reqLogin} from '../api/index';
 import {SAVE_USER} from './action-type';
 
 const saveUser = user=>({type:SAVE_USER,data:user});

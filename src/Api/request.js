@@ -1,5 +1,6 @@
   import axios from 'axios';
-  import errCode from './errCode';
+  import errCode from '../config/errCode';
+  import store from '../redux/store';
   // 配置axios拦截器
 
   /*
@@ -30,9 +31,9 @@
   // 请求拦截器
   axiosInstance.interceptors.request.use(config => { // 请求成功的回调函数 config为请求报文的内容
     // 如果需要token令牌 则给请求头设置属性 authorization  值为 Bearer token
-    let token = ''
+    let token = store.getState().user.token;
     if (token) {
-      config.headers.authorization = `Bearer ${token}`
+      config.headers.authorization = `Bearer ${token}`;
     }
     /*
       如果是POST请求。需要开发者检查请求头是：application/json  applicaion/x-www-form-urlencoded
