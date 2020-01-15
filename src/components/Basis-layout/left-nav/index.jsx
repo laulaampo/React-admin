@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Menu, Icon } from 'antd';
 import menus from '../../../config/meaus.js'; // 引入导航信息数据 is an Array
 import { Link ,withRouter} from 'react-router-dom';
+import {  FormattedMessage} from 'react-intl';
 const { SubMenu, Item } = Menu;
 @withRouter // 包裹一层高阶函数withRouter 使当前组件获得三大属性match location history 可以修改url路径
  class LeftNav extends Component {
@@ -15,7 +16,7 @@ const { SubMenu, Item } = Menu;
           title={
             <span>
               <Icon type={menu.icon} /> 
-              <span>{menu.title}</span>
+              <FormattedMessage id={menu.title}/>
             </span>
           }
         >
@@ -34,7 +35,7 @@ const { SubMenu, Item } = Menu;
       {/* key为menu.path 方便进行url操作 */}
         <Link to={menu.path}> 
         <Icon type={menu.icon} />
-        <span>{menu.title}</span>
+        <FormattedMessage id={menu.title}/>
         </Link>
       </Item>
 
@@ -47,7 +48,7 @@ const { SubMenu, Item } = Menu;
       //  find方法只有Boolean为true才会返回值 否则返回undefined
       }
     })
-    if(menu){ // 如果找到了 返回这个path (匹配到了当前url的path 作为初始展开的菜单项)
+    if(menu){ // 如果找到了 返回这个path (匹配到了当前url的path 作为初始展开的菜单项) 返回父级的path
       return menu.path
     }
   }

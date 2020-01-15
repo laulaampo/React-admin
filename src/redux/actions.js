@@ -1,13 +1,16 @@
 // 存储 action 对象的工厂函数集合
 import {setItem} from '../utils/storage';
 import {reqLogin} from '../api/index';
-import {SAVE_USER,REMOVE_USER} from './action-type';
+import {SAVE_USER,REMOVE_USER,CHANGE_LANGUAGE} from './action-type';
 
 // 同步登录 用于生产action对象
 const saveUser = user=>({type:SAVE_USER,data:user});
 
 // 同步登出功能 无需传对象
 export const removeUser = ()=>({type:REMOVE_USER})
+
+// 同步切换语言状态
+export const changeLanguage = lan =>({type:CHANGE_LANGUAGE,data:lan})
 
 // 异步登录 用于发送POST请求 请求登录
 export const saveUserAsync = (username,password)=>{ //传入参数 用户名 和密码

@@ -1,15 +1,19 @@
 import React from 'react';
 import { Layout,  Breadcrumb } from 'antd';
+// 侧边栏组件
 import LeftNav from './left-nav/';
-import HeaderMain from '../header-main';
+// 头部组件
+import HeaderMain from './header-main';
 import './index.less';
+import {FormattedMessage} from 'react-intl';
 import img from '../../asset/img/logo.png';
+import withCheckLogin from '../../containers/With-checkLogin/index';
 
 
 
 const { Header, Content, Footer, Sider } = Layout;
 
-
+@withCheckLogin
 class BasicLayout extends React.Component {
   state = {
     collapsed: false,
@@ -31,7 +35,9 @@ class BasicLayout extends React.Component {
           <div className="left-nav-logo">
             <img src={img} alt="logo"/>
             {/* 根据状态isShow确定文字是否隐藏 通过点击切换侧边栏收缩来更换状态 */}
-            <h2 style={{display:isShow?'block':'none'}}>硅谷后台</h2>
+            <h2 style={{display:isShow?'block':'none'}}>
+              <FormattedMessage id="title" />
+            </h2>
             </div>
             <LeftNav />
         </Sider>
