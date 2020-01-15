@@ -36,6 +36,7 @@ class BasicLayout extends React.Component {
             <img src={img} alt="logo" />
             {/* 根据状态isShow确定文字是否隐藏 通过点击切换侧边栏收缩来更换状态 */}
             <h2 style={{ display: isShow ? 'block' : 'none' }}>
+              {/* 需要国际化的文本 都通过 FormattedMessage 组件来展示*/}
               <FormattedMessage id="title" />
             </h2>
           </div>

@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { Card, Table, Button, Icon } from 'antd';
+import { connect } from 'react-redux';
+import {getCategoryAsync} from '../../redux/actions.js';
 
-export default class Category extends Component {
+@connect((state)=>({
+  categories:state.categories // 当前props接收到的categories 为react redux 的state中的ruducers的categories的result
+}),{
+  getCategoryAsync
+})
+class Category extends Component {
   columns = [
     {
       title:'品类名称', // 显示列名字
@@ -12,29 +19,35 @@ export default class Category extends Component {
       dataIndex:'operation',
       render(){
         return <div>
-          <button type='link'>修改分类</button>
-          <button type='link'>删除分类</button>
+          <Button type='link'>修改分类</Button>
+          <Button type='link'>删除分类</Button>
         </div>
       }
     }
   ]
+  componentDidMount(){
+    this.props.getCategoryAsync();
+  }
   render() {
+    const {categories} = this.props;
     return (
       <div>
         <Card title="分类管理" extra={<Button type="primary"> <Icon type="plus" /> 分类列表</Button>}>
           <Table
           columns={this.columns} // 指定表头信息
           bordered // 边框
-          // dataSource
+          dataSource={categories} // 接收数组 要显示的数据
           pagination= {{
-            defaultPageSize: 3,
-            pageSizeOptions: ['3', '6', '9', '12'],
+            defaultPageSize: 3, // 默认每页显示行数
+            pageSizeOptions: ['3', '6', '9', '12'], // 每页显示x行 下拉选项
             showSizeChanger: true, // 是否显示改变 pageSize
             showQuickJumper: true // 是否显示快速跳转
            }}
+           rowKey='_id' // 每行的key属性
           />
         </Card>
       </div>
     )
   }
 }
+export default Category;

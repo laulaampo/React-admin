@@ -20,15 +20,15 @@ import routes from './config/routes';
 
   render() {
   
-console.log(routes);
     // const lauguage =  navigator.language || navigators[0] || 'zh-CN'; // 从navigator获取当前浏览器默认语言 如果没有则默认是中文'zh-CN'
     const {language} = this.props;
 
     const messages = language === 'en' ? en :zhCN; // 根据language选择语言 如果是英语则使用en语言包 否则使用zhCN语言包 
     // ConfigProvider处理antd组件的国际化 IntlProvider处理自定义文字的国际化
-    const isEn = language === 'en';
+    const isEn = language === 'en'; // 如果是英文返回true
     return <ConfigProvider 
-    locale={isEn ? en_US : zh_CN}>
+    locale={isEn ? en_US : zh_CN}> 
+    {/* 为antd组件选择语言包↑ */}
 
       <IntlProvider 
     locale={language} //选择语言

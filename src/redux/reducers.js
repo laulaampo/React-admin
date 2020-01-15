@@ -4,7 +4,8 @@ import {
 import {
   SAVE_USER,
   REMOVE_USER,
-  CHANGE_LANGUAGE
+  CHANGE_LANGUAGE,
+  GET_CAGEGORY_LIST
 } from './action-type';
 import {
   getItem
@@ -37,7 +38,18 @@ function language(preState = initLanguage, action) {
   }
 }
 
+const initCategory = [] // 默认的category数据是空数组
+function categories(preState=initCategory,action){
+  switch(action.type){
+    case GET_CAGEGORY_LIST:
+      return action.data; // 直接返回新数据
+    default:
+      return preState;
+  }
+}
+
 export default combineReducers({
   user,
-  language
+  language,
+  categories
 });

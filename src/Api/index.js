@@ -1,6 +1,7 @@
 import axiosInstance from './request';
 
 export const reqLogin = (password,username)=>{
+  // 发送登录请求
   // 返回一个promise对象
   return axiosInstance({ // 请求参数
     url:'/login',
@@ -9,5 +10,13 @@ export const reqLogin = (password,username)=>{
       username,
       password
     }
+  })
+}
+
+// 发送请求cagegory分类信息请求
+export const reqCategory = ()=>{
+  return axiosInstance({
+    url: '/category/get',
+    method: 'GET'
   })
 }
