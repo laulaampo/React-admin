@@ -20,7 +20,7 @@ import routes from './config/routes';
 
   render() {
   
-
+console.log(routes);
     // const lauguage =  navigator.language || navigators[0] || 'zh-CN'; // 从navigator获取当前浏览器默认语言 如果没有则默认是中文'zh-CN'
     const {language} = this.props;
 
