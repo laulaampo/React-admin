@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './containers/Login/index';
-import Home from './components/Home';
 import BasicLayout from './components/Basis-layout';
 import {connect} from 'react-redux';
 // 国际化包
@@ -12,6 +11,7 @@ import { ConfigProvider } from 'antd';
 import './App.less';
 import zh_CN from 'antd/es/locale/zh_CN';
 import en_US from 'antd/es/locale/en_US';
+import routes from './config/routes';
 
 @connect(state =>({
   language:state.language
@@ -38,7 +38,15 @@ import en_US from 'antd/es/locale/en_US';
         <Switch>
           <Route path='/login' exact component={Login} />
           <BasicLayout>
-            <Route path='/' exact component={Home} />
+            {/* <Route path='/' exact component={Home} /> 
+
+            通过遍历路由组件的集合数组生成路由组件 使每次点击都会切换只显示一个路由组件
+          */}
+            {
+              routes.map((route)=>{
+                return <Route {...route} key={route.path}/>
+              })
+            }
           </BasicLayout>
         </Switch>
       </Router>

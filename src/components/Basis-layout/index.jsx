@@ -1,11 +1,11 @@
 import React from 'react';
-import { Layout,  Breadcrumb } from 'antd';
+import { Layout, Breadcrumb } from 'antd';
 // 侧边栏组件
 import LeftNav from './left-nav/';
 // 头部组件
 import HeaderMain from './header-main';
 import './index.less';
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import img from '../../asset/img/logo.png';
 import withCheckLogin from '../../containers/With-checkLogin/index';
 
@@ -17,13 +17,13 @@ const { Header, Content, Footer, Sider } = Layout;
 class BasicLayout extends React.Component {
   state = {
     collapsed: false,
-    isShow:true
+    isShow: true
   };
 
   // 收缩侧边栏函数
   onCollapse = collapsed => {
     const { isShow } = this.state;
-    this.setState({ collapsed, isShow:!isShow });
+    this.setState({ collapsed, isShow: !isShow });
   };
 
   render() {
@@ -33,24 +33,23 @@ class BasicLayout extends React.Component {
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
           <div className="left-nav-logo">
-            <img src={img} alt="logo"/>
+            <img src={img} alt="logo" />
             {/* 根据状态isShow确定文字是否隐藏 通过点击切换侧边栏收缩来更换状态 */}
-            <h2 style={{display:isShow?'block':'none'}}>
+            <h2 style={{ display: isShow ? 'block' : 'none' }}>
               <FormattedMessage id="title" />
             </h2>
-            </div>
-            <LeftNav />
+          </div>
+          <LeftNav />
         </Sider>
-        
+
         <Layout>
-        <Header style={{ background: '#fff', padding: 0, height: 80 }}>
-         < HeaderMain />
+          <Header style={{ background: '#fff', padding: 0, height: 80 }}>
+            < HeaderMain />
           </Header>
 
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>User</Breadcrumb.Item>
-              <Breadcrumb.Item>Bill</Breadcrumb.Item>
+              
             </Breadcrumb>
             <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>{children}</div>
           </Content>

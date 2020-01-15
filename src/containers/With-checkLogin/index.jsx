@@ -41,8 +41,8 @@ export default function withCheckLogin(WrappedComponent){
           return <Redirect to='/'/>
         }
       } else {
-        // 没登录过 且url在主页 则重定向去登录界面
-        if(pathname === '/'){
+        // 没登录过 且不在login页面 则跳转到login
+        if(pathname !== '/login'){
           return <Redirect to = '/login' />
         }
       }
