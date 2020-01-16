@@ -13,7 +13,7 @@ import withCheckLogin from '../../containers/With-checkLogin/index';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-@withCheckLogin
+@withCheckLogin // 再次包裹此高阶组件 会对所以子组件进行路径/登录状态的验证 因为是先渲染父组件再渲染子组件
 class BasicLayout extends React.Component {
   state = {
     collapsed: false,

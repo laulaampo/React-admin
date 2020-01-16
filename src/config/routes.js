@@ -1,6 +1,6 @@
 // 保存路由组件属性的文件
 
-import Category from '../components/Category';
+import Category from '../containers/Category';
 import Home from '../components/Home';
 
 const routes = [

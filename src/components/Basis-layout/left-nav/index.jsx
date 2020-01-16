@@ -32,7 +32,7 @@ const { SubMenu, Item } = Menu;
 
   createMeausItem = menu => { // 传入单个nav的数据对象
     return <Item key={menu.path}>
-      {/* key为menu.path 方便进行url操作 */}
+      {/* key为menu.path 方便进行url操作  Link可以使点击的nav将url修改成指定的url*/}
         <Link to={menu.path}> 
         <Icon type={menu.icon} />
         <FormattedMessage id={menu.title}/>

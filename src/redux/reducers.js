@@ -5,7 +5,8 @@ import {
   SAVE_USER,
   REMOVE_USER,
   CHANGE_LANGUAGE,
-  GET_CAGEGORY_LIST
+  GET_CAGEGORY_LIST,
+  ADD_CATEGORY
 } from './action-type';
 import {
   getItem
@@ -43,6 +44,8 @@ function categories(preState=initCategory,action){
   switch(action.type){
     case GET_CAGEGORY_LIST:
       return action.data; // 直接返回新数据
+    case ADD_CATEGORY: // 添加新的category
+        return [...preState,action.data] // 不能改变原状态 只能后续添加
     default:
       return preState;
   }

@@ -20,3 +20,15 @@ export const reqCategory = ()=>{
     method: 'GET'
   })
 }
+
+// 发送添加分类的请求
+export const reqAddCategory = categoryName =>{
+  return axiosInstance({
+    url: '/category/add',
+    method: 'POST',
+    data:{
+      // 分类名
+      categoryName
+    }
+  })
+}
