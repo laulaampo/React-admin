@@ -103,9 +103,10 @@ export default class Product extends Component {
               showQuickJumper: true, // 是否可以改变 pageSize
               total, // 总数 为状态中的总数
               onChange:this.getProducrList,// 变化时的回调函数
-              onShowSizeChange:this.getProducrList // 显示尺寸改变时的回调函数
+              onShowSizeChange:this.getProducrList, // 显示尺寸改变时的回调函数
             }
           }
+          rowKey = '_id'
         />
       </Card>
     )
