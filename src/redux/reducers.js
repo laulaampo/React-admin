@@ -7,7 +7,8 @@ import {
   CHANGE_LANGUAGE,
   GET_CAGEGORY_LIST,
   ADD_CATEGORY,
-  CHANGE_CATEGORY
+  CHANGE_CATEGORY,
+  DELETE_CATEGORY
 } from './action-type';
 import {
   getItem
@@ -48,10 +49,12 @@ function categories(preState=initCategory,action){
     case ADD_CATEGORY: // 添加新的category
         return [...preState,action.data] // 不能改变原状态 只能后续添加
     case CHANGE_CATEGORY:
-      return preState.map((category)=>{
+      return preState.map((category)=>{ // 将元数据中id与修改后id相同的category进行修改
         if(category._id === action.data._id) return action.data;
         return category;
-      })
+      });
+    case DELETE_CATEGORY:
+      return preState.filter((item)=>item._id !== action.data ) // 过滤掉指定id的category 即删除
     default:
       return preState;
   }

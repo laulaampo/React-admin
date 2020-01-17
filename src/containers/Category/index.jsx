@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Table, Button, Icon, Modal, message } from 'antd';
 import { connect } from 'react-redux';
-import { getCategoryAsync, addCotegoryAsync, changeCategoryAsync } from '../../redux/actions.js';
+import { getCategoryAsync, addCotegoryAsync, changeCategoryAsync,deleteCategoryAsync } from '../../redux/actions.js';
 import AddCategoryForm from './add-category-form';
 
 @connect((state) => ({
@@ -9,7 +9,8 @@ import AddCategoryForm from './add-category-form';
 }), {
     getCategoryAsync,
     addCotegoryAsync,
-    changeCategoryAsync
+    changeCategoryAsync,
+    deleteCategoryAsync
   })
 class Category extends Component {
   state = {
@@ -30,7 +31,7 @@ class Category extends Component {
         return <div>
           {/* 如果是修改函数 则通过render在渲染时传入当前category的数据对象 */}
           <Button type='link' onClick={this.showModal(category)}>修改分类</Button>
-          <Button type='link'>删除分类</Button>
+          <Button type='link' onClick={this.deleteCategory(category)}>删除分类</Button>
         </div>
       }
     }
@@ -114,10 +115,29 @@ class Category extends Component {
       })
     }
   }
+
+  // 删除当前category的点击事件
+  deleteCategory = (category)=>{ // 传入衣蛾category对象 
+      return ()=>{
+        Modal.confirm(
+          {
+            title:`你确定要删除${category.name}分类码`,
+            onOk :()=>{
+              this.props.deleteCategoryAsync(category._id) // 传id 请求参数
+              .then((response)=>{
+                message.success('删除成功！')
+              })
+              .catch((err)=>{
+                message.error(err);
+              })
+            }
+          }
+        )
+      }
+  }
   render() {
     const { categories } = this.props;
     const { category, isUpdata } = this.state;
-    console.log(category)
     // const { validateFields } = this.addCategoryForm.props.form;
     // console.log(this.addCategoryForm.props.form.validateFields)
     return (

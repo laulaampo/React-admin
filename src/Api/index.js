@@ -46,3 +46,14 @@ export const reqChangeCategory = (categoryId,categoryName) =>{
     }
   })
 }
+
+// 发送删除分类的请求
+export const reqDeleteCategory = categoryId =>{
+  return axiosInstance({
+    url: '/category/delete',
+    method: 'POST',
+    data: {
+      categoryId,
+    }
+  });
+}

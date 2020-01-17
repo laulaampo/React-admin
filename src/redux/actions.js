@@ -1,7 +1,7 @@
 // 存储 action 对象的工厂函数集合
 import {setItem} from '../utils/storage';
-import {reqLogin,reqCategory,reqAddCategory,reqChangeCategory} from '../api/index';
-import {SAVE_USER,REMOVE_USER,CHANGE_LANGUAGE,GET_CAGEGORY_LIST,ADD_CATEGORY,CHANGE_CATEGORY} from './action-type';
+import {reqLogin,reqCategory,reqAddCategory,reqChangeCategory,reqDeleteCategory} from '../api/index';
+import {SAVE_USER,REMOVE_USER,CHANGE_LANGUAGE,GET_CAGEGORY_LIST,ADD_CATEGORY,CHANGE_CATEGORY,DELETE_CATEGORY} from './action-type';
 
 // 同步登录 用于生产action对象
 const saveUser = user=>({type:SAVE_USER,data:user});
@@ -51,13 +51,28 @@ export const addCotegoryAsync = categoryName =>{
   }
 }
 
+// 同步生成修改category的action对象
  const changeCategory = category =>({type:CHANGE_CATEGORY,data:category});
 
+//  异步发送请求修改category的函数
  export const changeCategoryAsync = (categoryId,categoryName) =>{
   return dispatch =>{
     return reqChangeCategory(categoryId,categoryName)
     .then((resoponse)=>{
       dispatch(changeCategory(resoponse));
+    })
+  }
+}
+
+// 同步生产删除category的action对象
+const deleteCategory = categoryId => ({type:DELETE_CATEGORY,data:categoryId});
+
+// 异步发送请求删除category的函数
+export const  deleteCategoryAsync = categoryId =>{
+  return dispatch =>{
+    return reqDeleteCategory(categoryId)
+    .then((response)=>{
+      dispatch(deleteCategory(response));
     })
   }
 }
