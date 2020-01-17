@@ -57,3 +57,15 @@ export const reqDeleteCategory = categoryId =>{
     }
   });
 }
+
+// 请求商品列表
+export const reqGetProductList = (pageNum, pageSize)=>{
+  return axiosInstance({
+    url:'product/list',
+    method:'GET',
+    params:{
+      pageNum,
+      pageSize
+    }
+  })
+}

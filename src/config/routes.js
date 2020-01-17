@@ -2,6 +2,7 @@
 
 import Category from '../containers/Category';
 import Home from '../components/Home';
+import Product from '../containers/Product';
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
   {
     path:'/products/category',
     component:Category,
+    exact:true
+  },
+  {
+    path:'/products/product',
+    component:Product,
     exact:true
   }
 ];
