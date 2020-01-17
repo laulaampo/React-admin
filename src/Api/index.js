@@ -32,3 +32,17 @@ export const reqAddCategory = categoryName =>{
     }
   })
 }
+
+// 发送修改分类的请求
+export const reqChangeCategory = (categoryId,categoryName) =>{
+  return axiosInstance({
+    url: '/category/update',
+    method: 'POST',
+    data:{
+      // 当前分类的ID
+      categoryId,
+      // 分类名
+      categoryName
+    }
+  })
+}

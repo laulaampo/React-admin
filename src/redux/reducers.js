@@ -6,7 +6,8 @@ import {
   REMOVE_USER,
   CHANGE_LANGUAGE,
   GET_CAGEGORY_LIST,
-  ADD_CATEGORY
+  ADD_CATEGORY,
+  CHANGE_CATEGORY
 } from './action-type';
 import {
   getItem
@@ -46,6 +47,11 @@ function categories(preState=initCategory,action){
       return action.data; // 直接返回新数据
     case ADD_CATEGORY: // 添加新的category
         return [...preState,action.data] // 不能改变原状态 只能后续添加
+    case CHANGE_CATEGORY:
+      return preState.map((category)=>{
+        if(category._id === action.data._id) return action.data;
+        return category;
+      })
     default:
       return preState;
   }
