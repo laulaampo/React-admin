@@ -38,7 +38,10 @@ class Category extends Component {
   ]
 
   componentDidMount() {
-    this.props.getCategoryAsync();
+    if (!this.props.categories.length) {
+      // 只有当redux管理的categories数据没有，才会发送请求，请求分类数据
+      this.props.getCategoryAsync();
+    }
   }
 
   handleOk = () => {
@@ -130,6 +133,9 @@ class Category extends Component {
               .catch((err)=>{
                 message.error(err);
               })
+            },
+            onCancel:()=>{
+              this.CategoryForm.props.form.resetFields();
             }
           }
         )

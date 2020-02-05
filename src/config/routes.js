@@ -3,6 +3,7 @@
 import Category from '../containers/Category';
 import Home from '../components/Home';
 import Product from '../containers/Product';
+import AddProduct from '../containers/Product/add-product';
 
 const routes = [
   {
@@ -11,13 +12,18 @@ const routes = [
     exact:true
   },
   {
-    path:'/products/category',
+    path:'/category',
     component:Category,
     exact:true
   },
   {
-    path:'/products/product',
+    path:'/product',
     component:Product,
+    exact:true
+  },
+  {
+    path:'/product/add',
+    component:AddProduct,
     exact:true
   }
 ];

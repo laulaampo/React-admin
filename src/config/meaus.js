@@ -12,12 +12,12 @@ const menus = [
       {
         title: 'category',
         icon: 'bars',
-        path: '/products/category'
+        path: '/category'
       },
       {
         title: 'product',
         icon: 'tool',
-        path: '/products/product'
+        path: '/product'
       }
     ]
   },

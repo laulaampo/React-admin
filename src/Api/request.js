@@ -1,6 +1,9 @@
   import axios from 'axios';
   import errCode from '../config/errCode';
   import store from '../redux/store';
+  import {removeItem} from '../utils/storage';
+  import {removeUser} from '../redux/actions';
+  import { message} from 'antd';
   // 配置axios拦截器
 
   /*
@@ -72,7 +75,14 @@
       let errMsg = ''
       if(err.response){ // 如果接收到返回报文 但是响应失败
         // 根据返回的状态码 写入错误原因
-        errMsg = errCode[err.response.status];
+        const status = err.response.status
+        errMsg = errCode[status];
+        // token过期 退出登录状态 删除localStorage和redux管理的登录状态
+        if(status === 401){
+          removeItem('user');
+          store.dispatch(removeUser());
+          message.error('登录失效，请重新登录')
+        }
       }else{
         // 如果没有返回报文 则根据浏览器报错关键字决定错误原因
         if(err.message.indexOf('Network Error')!==-1){

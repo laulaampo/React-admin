@@ -79,7 +79,10 @@ import dayjs from 'dayjs'
       if(meau.children){
         for(let i =0;i<meau.children.length;i++){
           const cMeau = meau.children[i];
-          if(cMeau.path === pathname){
+          // 如果pathname是 /product 返回 product
+          // 如果pathname是 /product/add 返回 product
+          // cMenu.path是 /product
+          if (pathname.indexOf(cMeau.path) !== -1) {
             return cMeau.title;
           }
         }

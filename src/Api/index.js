@@ -69,3 +69,18 @@ export const reqGetProductList = (pageNum, pageSize)=>{
     }
   })
 }
+
+// 添加商品数据
+export const reqAddProduct = ({name, desc, price, detail, categoryId})=>{
+  return axiosInstance({
+    url:'/product/add',
+    method:'POST',
+    data:{
+        name, 
+        desc,
+        price, 
+        detail, 
+        categoryId
+      }
+  })
+}

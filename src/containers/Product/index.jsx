@@ -63,7 +63,10 @@ export default class Product extends Component {
       message.error(err);
     })
   }
-  
+  // 跳转到添加商品组件
+  showAddProduct = ()=>{
+    this.props.history.push('/product/add')
+  }
   componentDidMount(){ // 组件渲染后 请求商品数据 默认是一页 三个
     this.getProducrList(1,3);
   }
@@ -86,7 +89,7 @@ export default class Product extends Component {
           </div>
         }
         extra={
-          <Button type='primary'>
+          <Button type='primary' onClick={this.showAddProduct}>
             <Icon type='plus' />
             添加商品
           </Button>

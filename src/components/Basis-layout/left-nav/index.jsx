@@ -55,7 +55,11 @@ const { SubMenu, Item } = Menu;
 
   render() {
     // const {pathname} = this.props.location;
-    const { pathname } = this.props.location;
+    let { pathname } = this.props.location;
+    if(pathname === '/product/add'){
+      // 为了默认选中和展开子菜单 如果pathname为/products/add 则强制修改为/products
+      pathname = '/product'
+    }
     return (
       <Menu theme="dark" // 默认主题颜色
       defaultSelectedKeys={[pathname]} // 默认选中的菜单
