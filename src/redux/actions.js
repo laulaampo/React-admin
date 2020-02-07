@@ -1,7 +1,7 @@
 // 存储 action 对象的工厂函数集合
 import {setItem} from '../utils/storage';
-import {reqLogin,reqCategory,reqAddCategory,reqChangeCategory,reqDeleteCategory} from '../api/index';
-import {SAVE_USER,REMOVE_USER,CHANGE_LANGUAGE,GET_CAGEGORY_LIST,ADD_CATEGORY,CHANGE_CATEGORY,DELETE_CATEGORY} from './action-type';
+import {reqLogin,reqCategory,reqAddCategory,reqChangeCategory,reqDeleteCategory,reqGetRoleList,reqAddRole} from '../api/index';
+import {SAVE_USER,REMOVE_USER,CHANGE_LANGUAGE,GET_CAGEGORY_LIST,ADD_CATEGORY,CHANGE_CATEGORY,DELETE_CATEGORY,GET_ROLE_LIST,ADD_ROLE} from './action-type';
 
 // 同步登录 用于生产action对象
 const saveUser = user=>({type:SAVE_USER,data:user});
@@ -73,6 +73,31 @@ export const  deleteCategoryAsync = categoryId =>{
     return reqDeleteCategory(categoryId)
     .then((response)=>{
       dispatch(deleteCategory(response));
+    })
+  }
+}
+
+// 同步action
+const getRoleList = roles => ({ type: GET_ROLE_LIST, data: roles });
+// 异步发送请求角色列表的函数
+export const getRoleListAsync = ()=>{
+  return dispatch => {
+    // 执行异步操作
+    return reqGetRoleList().then(res => {
+      // 请求成功，更新redux状态
+      dispatch(getRoleList(res));
+    });
+  };
+}
+
+// 同步
+const addRole = role => ({type:ADD_ROLE,data:role})
+// 异步发送添加角色的函数
+export const addRoleAsync = name =>{
+  return dispatch =>{
+    // 执行异步操作
+    return reqAddRole(name).then((res)=>{
+      dispatch(addRole(res));
     })
   }
 }

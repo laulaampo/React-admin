@@ -105,7 +105,7 @@ class ProductForm extends Component {
     this.props.history.push('/product');
   }
   render() {
-    const { categories } = this.props;
+    
     const formItemLayout = {
       labelCol: {
         // 左边文字占的区域大小
@@ -119,8 +119,14 @@ class ProductForm extends Component {
       }
     };
     // 获取表单验证的方法
-    const { getFieldDecorator } = this.props.form;
-    const {  state } = this.props.location;
+    const {
+      form: { getFieldDecorator },
+      categories,
+      location
+    } = this.props;
+
+    // 获取路由传递的数据: state 商品数据
+    const { state } = location;
  
 
     return (

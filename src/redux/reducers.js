@@ -8,7 +8,9 @@ import {
   GET_CAGEGORY_LIST,
   ADD_CATEGORY,
   CHANGE_CATEGORY,
-  DELETE_CATEGORY
+  DELETE_CATEGORY,
+  GET_ROLE_LIST,
+  ADD_ROLE
 } from './action-type';
 import {
   getItem
@@ -60,8 +62,21 @@ function categories(preState=initCategory,action){
   }
 }
 
+const initRoleList = []// 角色列表默认是空数组
+function roles(preState=initRoleList,action){
+  switch(action.type){
+    case GET_ROLE_LIST:
+      return action.data
+    case ADD_ROLE:
+      return [...preState,action.data]
+    default:
+      return preState;
+  }
+}
+
 export default combineReducers({
   user,
   language,
-  categories
+  categories,
+  roles
 });

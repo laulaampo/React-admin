@@ -86,9 +86,9 @@ class Product extends Component {
     return ()=>{
       const {categories} = this.props;
       // eslint-disable-next-line array-callback-return
-      const categoryName = categories.filter((category)=>{
+      const categoryName = categories.find((category)=>{
         if(category._id === product.categoryId){
-          return category
+          return category.name
         }
       })
       product.categoryName = categoryName;

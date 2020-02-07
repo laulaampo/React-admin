@@ -5,6 +5,7 @@ import Home from '../components/Home';
 import Product from '../containers/Product';
 import ProductForm from '../containers/Product/product-form';
 import ProductLook from '../containers/Product/product-look';
+import Role from '../containers/Role';
 
 const routes = [
   {
@@ -37,6 +38,11 @@ const routes = [
   {
     path:'/product/:id',
     component:ProductLook,
+    exact:true
+  },
+  {
+    path:'/role',
+    component:Role,
     exact:true
   },
 ];
