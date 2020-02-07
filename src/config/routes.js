@@ -3,7 +3,8 @@
 import Category from '../containers/Category';
 import Home from '../components/Home';
 import Product from '../containers/Product';
-import AddProduct from '../containers/Product/add-product';
+import ProductForm from '../containers/Product/product-form';
+import ProductLook from '../containers/Product/product-look';
 
 const routes = [
   {
@@ -23,9 +24,21 @@ const routes = [
   },
   {
     path:'/product/add',
-    component:AddProduct,
+    component:ProductForm,
     exact:true
-  }
+  },
+  {
+    // /product/update/5ddde47170cb1267ccc6aba8 因为id有n个
+    // 匹配多个地址
+    path: '/product/updata/:id',
+    component: ProductForm,
+    exact: true
+  },
+  {
+    path:'/product/:id',
+    component:ProductLook,
+    exact:true
+  },
 ];
 
 export default routes;
