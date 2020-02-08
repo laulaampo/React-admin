@@ -41,12 +41,15 @@ import routes from './config/routes';
             {/* <Route path='/' exact component={Home} /> 
 
             通过遍历路由组件的集合数组生成路由组件 使每次点击都会切换只显示一个路由组件
+            switch只能作用于一层子元素
           */}
+          <Switch> 
             {
               routes.map((route)=>{
                 return <Route {...route} key={route.path}/>
               })
             }
+          </Switch>
           </BasicLayout>
         </Switch>
       </Router>

@@ -1,7 +1,25 @@
 // 存储 action 对象的工厂函数集合
 import {setItem} from '../utils/storage';
-import {reqLogin,reqCategory,reqAddCategory,reqChangeCategory,reqDeleteCategory,reqGetRoleList,reqAddRole} from '../api/index';
-import {SAVE_USER,REMOVE_USER,CHANGE_LANGUAGE,GET_CAGEGORY_LIST,ADD_CATEGORY,CHANGE_CATEGORY,DELETE_CATEGORY,GET_ROLE_LIST,ADD_ROLE} from './action-type';
+import {
+  reqLogin,
+  reqCategory,
+  reqAddCategory,
+  reqChangeCategory,
+  reqDeleteCategory,
+  reqGetRoleList,
+  reqAddRole,
+  reqUpdateRole
+} from '../api/index';
+import {
+  SAVE_USER,REMOVE_USER,
+  CHANGE_LANGUAGE,
+  GET_CAGEGORY_LIST,
+  ADD_CATEGORY,
+  CHANGE_CATEGORY,
+  DELETE_CATEGORY,
+  GET_ROLE_LIST,
+  ADD_ROLE,UPDATE_ROLE
+} from './action-type';
 
 // 同步登录 用于生产action对象
 const saveUser = user=>({type:SAVE_USER,data:user});
@@ -90,7 +108,7 @@ export const getRoleListAsync = ()=>{
   };
 }
 
-// 同步
+// 同步添加角色的函数
 const addRole = role => ({type:ADD_ROLE,data:role})
 // 异步发送添加角色的函数
 export const addRoleAsync = name =>{
@@ -101,3 +119,15 @@ export const addRoleAsync = name =>{
     })
   }
 }
+
+// 更新角色权限的同步函数 
+const updateRole = role=>({type:UPDATE_ROLE,data:role})
+// 更新角色权限的异步函数
+export const updateRoleAsync = ({menus,roleId,authName})=>{
+  return dispatch =>{
+    return reqUpdateRole({menus,roleId,authName}).then((res)=>{
+      dispatch(updateRole(res))
+      return res;
+    })
+  }
+} 

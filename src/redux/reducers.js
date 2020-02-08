@@ -10,7 +10,8 @@ import {
   CHANGE_CATEGORY,
   DELETE_CATEGORY,
   GET_ROLE_LIST,
-  ADD_ROLE
+  ADD_ROLE,
+  UPDATE_ROLE
 } from './action-type';
 import {
   getItem
@@ -69,6 +70,13 @@ function roles(preState=initRoleList,action){
       return action.data
     case ADD_ROLE:
       return [...preState,action.data]
+    case UPDATE_ROLE:
+      return preState.map((item)=> {
+        if(item._id === action.data._id){ // 找出重新设置权限的role
+          return action.data // 重新赋值
+        }
+        return item; // 不是的不变
+      })
     default:
       return preState;
   }

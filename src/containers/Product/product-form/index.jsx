@@ -17,7 +17,7 @@ import './index.less';
 import 'braft-editor/dist/index.css';
 import { getCategoryAsync } from '../../../redux/actions';
 import { connect } from 'react-redux';
-import { reqAddProduct,reqUpdateProduct } from '../../../api/index';
+import { reqAddProduct, reqUpdateProduct } from '../../../api/index';
 const { Item } = Form;
 const { Option } = Select;
 
@@ -26,28 +26,45 @@ const { Option } = Select;
 })
 @Form.create() // 使用From组件的表单验证
 class ProductForm extends Component {
+  state = {
+    product:{} // 默认对象
+  }
   componentDidMount() {
     if (!this.props.categories.length) {
       // 只有当redux管理的categories数据没有，才会发送请求，请求分类数据
       this.props.getCategoryAsync();
     }
+    if(!this.isProductAdd() && !this.props.location.state){ // 如果是修改 但是又没有从路由中传值 就是从外部链接访问 就要请求当前商品的信息
+      const productId = this.props.match.params.id; // 从url获取当前商品的id
+      const {reqGetProduct} = this.props;
+      reqGetProduct(productId)
+      .then((res)=>{
+        this.setState({product:res}) // state中的商品信息 修改为请求回来的当前商品信息
+      })
+      .catch((err)=>{
+        message.error(err)
+      })
+    }
   }
-  handleCategoryId=(isProductAdd)=>{
-    if(isProductAdd){
+  // 处理分类id
+  handleCategoryId = (isProductAdd,product) => {
+    if (isProductAdd) {
       // 如果是添加商品 则显示默认分类为0  未分类
       return '0'
     }
     // 获取redux中所有分类数据
-    const {categories, location: {state: {categoryId}}} = this.props;
+    const { categories} = this.props;
+    // 在请求回来的商品信息中解构分类id
+    const {categoryId} = product;
     // 返回值是不确定的
-    const category = categories.find((category)=>{
+    const category = categories.find((category) => {
       // 如果找到了商品的分了 则返回商品 如果分类被删除 则返回undefined
       return category._id === categoryId;
     })
     if (category) {
       // 有值，说明找到了，商品分类是存在的
       return categoryId;
-    } 
+    }
 
     // 没有值，没有找到，说明商品分类被删除掉了
     return '0';
@@ -59,7 +76,7 @@ class ProductForm extends Component {
       let promise = null;
       if (!err) {
         const { name, desc, categoryId, price, detail } = values;
-        if(this.isProductAdd()){
+        if (this.isProductAdd()) {
           promise = reqAddProduct({
             name,
             desc,
@@ -67,7 +84,7 @@ class ProductForm extends Component {
             price,
             detail: detail.toHTML() // 如果富文本编辑器内容需要的是纯文本 则使用toText
           })
-        }else{
+        } else {
           promise = reqUpdateProduct({
             name,
             desc,
@@ -78,10 +95,10 @@ class ProductForm extends Component {
             productId: this.props.match.params.id
           })
         }
-          promise
+        promise
           .then(() => {
             // 添加成功 提示用户
-            message.success(`${this.isProductAdd?'修改':'添加'}商品成功`);
+            message.success(`${this.isProductAdd ? '修改' : '添加'}商品成功`);
             // 成功后跳转到products中
             this.props.history.replace('/product');
           })
@@ -95,17 +112,17 @@ class ProductForm extends Component {
     })
   }
   // 判断是添加还是修改
-  isProductAdd =()=>{
+  isProductAdd = () => {
     // 确定标识 当前是添加还是修改 默认是添加 通过路径名来确认 如果是从外部连接访问 则没有点击product中修改按钮 没有传参
     return this.props.location.pathname.indexOf('updata') === -1;
   }
-  
+
   back = () => {
     // 回退到/product
     this.props.history.push('/product');
   }
   render() {
-    
+
     const formItemLayout = {
       labelCol: {
         // 左边文字占的区域大小
@@ -124,10 +141,12 @@ class ProductForm extends Component {
       categories,
       location
     } = this.props;
-
+    // 请求回来的商品数据
+    const {product} = this.state;
     // 获取路由传递的数据: state 商品数据
-    const { state } = location;
- 
+    const routeData = location.state;
+    // 如果不是通过“修改”进来的数据则没有当前商品的信息 这时候就会发送请求获取 并且使用获取回来的数据进行渲染
+    const state = routeData || product;
 
     return (
       <Card title={
@@ -173,7 +192,7 @@ class ProductForm extends Component {
                     message: '请输入商品分类'
                   }
                 ],  // 表单的初始值initialValue
-                initialValue: this.handleCategoryId(this.isProductAdd())
+                initialValue: this.handleCategoryId(this.isProductAdd(),state)
               })(<Select placeholder="请选择商品分类">
                 {/* 添加一个默认的option */}
                 <Option key='0' value='0'>
@@ -223,7 +242,7 @@ class ProductForm extends Component {
                   }
                 ],
                 // BraftEditor文档的API 设置富文本编辑器的默认值
-              initialValue: this.isProductAdd() ? '' : BraftEditor.createEditorState(state.detail)
+                initialValue: this.isProductAdd() ? '' : BraftEditor.createEditorState(state.detail)
               })(<BraftEditor className='product-detail' />)
             }
           </Item>

@@ -13,21 +13,21 @@ class ProductLook extends Component {
     const { state } = this.props.location;
     console.log(this.props.location)
     return (
-        <Card title={<div>
-          <Icon type='arrow-left' className="go-back" onClick={this.back} />
-          商品详情
+      <Card title={<div>
+        <Icon type='arrow-left' className="go-back" onClick={this.back} />
+        商品详情
       </div>}
       >
-          <Descriptions bordered>
-        <Descriptions.Item label="商品名称">{state.name}</Descriptions.Item>
-            <Descriptions.Item label="商品描述">{state.desc}</Descriptions.Item>
-            <Descriptions.Item label="商品价格">{`￥${state.price}`}</Descriptions.Item>
-            <Descriptions.Item label="商品分类">{state.categoryName?state.categoryName.name:'暂无分类'}</Descriptions.Item>
-            <Descriptions.Item label="商品状态" span={2}>{state.status === 1 ? '已下架' : '已上架'}</Descriptions.Item>
-            <Descriptions.Item label="商品详情" dangerouslySetInnerHTML={{__html:this.state.html}} >
-              {state.detail}
-            </Descriptions.Item>
-          </Descriptions>
+        <Descriptions bordered>
+          <Descriptions.Item label="商品名称">{state.name}</Descriptions.Item>
+          <Descriptions.Item label="商品描述">{state.desc}</Descriptions.Item>
+          <Descriptions.Item label="商品价格">{`￥${state.price}`}</Descriptions.Item>
+          <Descriptions.Item label="商品分类">{state.categoryName ? state.categoryName.name : '暂无分类'}</Descriptions.Item>
+          <Descriptions.Item label="商品状态" span={2}>{state.status === 1 ? '已下架' : '已上架'}</Descriptions.Item>
+          <Descriptions.Item label="商品详情"  >
+            {state.detail}
+          </Descriptions.Item>
+        </Descriptions>
       </Card>
 
     )

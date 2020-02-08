@@ -35,7 +35,7 @@ const routes = [
     component: ProductForm,
     exact: true
   },
-  {
+  { // /product/add 会和这个一同匹配 发生报错 应当在渲染处多套一层<switch> 但是不能换位置 不然无法匹配/product/add
     path:'/product/:id',
     component:ProductLook,
     exact:true

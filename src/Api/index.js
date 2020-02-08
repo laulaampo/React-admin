@@ -101,6 +101,17 @@ export const reqUpdateProduct = ({name, desc, price, detail, categoryId,productI
   })
 }
 
+// 请求获取单个商品数据
+export const reqGetProduct = productId => {
+  return axiosInstance({
+    method: 'GET',
+    url: '/product/get',
+    params: {
+      productId
+    }
+  });
+};
+
 // 搜索商品数据
 export const reqSearchProduct = ({ searchType, searchValue, pageNum, pageSize }) => {
   return axiosInstance({
@@ -141,6 +152,19 @@ export const reqAddRole = (name) => {
     method: 'POST',
     data: {
       name
+    }
+  });
+};
+
+// 请求设置角色权限数据
+export const reqUpdateRole = ({ roleId, authName, menus }) => {
+  return axiosInstance({
+    url: '/role/update',
+    method: 'POST',
+    data: {
+      roleId,
+      authName,
+      menus
     }
   });
 };

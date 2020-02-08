@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Table, Button, Icon, Modal, message } from 'antd';
 import { connect } from 'react-redux';
-import { getCategoryAsync, addCotegoryAsync, changeCategoryAsync,deleteCategoryAsync } from '../../redux/actions.js';
+import { getCategoryAsync, addCotegoryAsync, changeCategoryAsync, deleteCategoryAsync } from '../../redux/actions.js';
 import AddCategoryForm from './add-category-form';
 
 @connect((state) => ({
@@ -53,25 +53,25 @@ class Category extends Component {
     // 获取当前组件state中的category
     const { category } = this.state;
     validateFields((err, value) => {
-      if(!err){
+      if (!err) {
         // 表单输入内容
-      const categoryName = value.categoryName;
-      // 创建一个空promise对象
-      let promise = null;
-      if(category.name){ // 如果此时的state中category有内容 说明是修改
-        promise = this.props.changeCategoryAsync(this.state.category._id,categoryName);
-      } else { // 如果此时的state中category没有内容 说明是添加
-        promise = this.props.addCotegoryAsync(categoryName)
-      }
-      promise
-      .then((response)=>{
-        message.success(`${category.name ? '修改':'添加'}成功`)
-        resetFields();
-        this.handleCancel();
-      })
-      .catch((err)=>{
-        message.error(err);
-      })
+        const categoryName = value.categoryName;
+        // 创建一个空promise对象
+        let promise = null;
+        if (category.name) { // 如果此时的state中category有内容 说明是修改
+          promise = this.props.changeCategoryAsync(this.state.category._id, categoryName);
+        } else { // 如果此时的state中category没有内容 说明是添加
+          promise = this.props.addCotegoryAsync(categoryName)
+        }
+        promise
+          .then((response) => {
+            message.success(`${category.name ? '修改' : '添加'}成功`)
+            resetFields();
+            this.handleCancel();
+          })
+          .catch((err) => {
+            message.error(err);
+          })
       }
       /* if (isUpdata) {
         if(!err){
@@ -120,26 +120,26 @@ class Category extends Component {
   }
 
   // 删除当前category的点击事件
-  deleteCategory = (category)=>{ // 传入衣蛾category对象 
-      return ()=>{
-        Modal.confirm(
-          {
-            title:`你确定要删除${category.name}分类码`,
-            onOk :()=>{
-              this.props.deleteCategoryAsync(category._id) // 传id 请求参数
-              .then((response)=>{
+  deleteCategory = (category) => { // 传入衣蛾category对象 
+    return () => {
+      Modal.confirm(
+        {
+          title: `你确定要删除${category.name}分类码`,
+          onOk: () => {
+            this.props.deleteCategoryAsync(category._id) // 传id 请求参数
+              .then((response) => {
                 message.success('删除成功！')
               })
-              .catch((err)=>{
+              .catch((err) => {
                 message.error(err);
               })
-            },
-            onCancel:()=>{
-              this.CategoryForm.props.form.resetFields();
-            }
+          },
+          onCancel: () => {
+            this.CategoryForm.props.form.resetFields();
           }
-        )
-      }
+        }
+      )
+    }
   }
   render() {
     const { categories } = this.props;
