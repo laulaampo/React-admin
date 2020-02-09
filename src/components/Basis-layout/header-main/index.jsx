@@ -103,7 +103,7 @@ import dayjs from 'dayjs'
           <Button size="small" onClick={this.screenFull}>
             <Icon type={isScreeFull ? 'fullscreen-exit' : 'fullscreen'} />
           </Button>
-          <Button size="small" onClick={this.changeLanguage}>{language === 'en'?'中文':'Engelish'
+          <Button size="small" onClick={this.changeLanguage}>{language === 'en'?'中文':'English'
           // 切换国际化功能的按钮
         }</Button>
           <span className="sayHi">Hello,{username}</span>

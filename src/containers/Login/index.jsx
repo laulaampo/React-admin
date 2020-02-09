@@ -5,6 +5,7 @@ import './index.less';
 import { connect } from 'react-redux';
 import { saveUserAsync } from '../../redux/actions';
 import withCheckLogin from '../../containers/With-checkLogin';
+import{validator}from '../../utils/tools'
 
 const { Item } = Form;
 
@@ -15,21 +16,7 @@ const { Item } = Form;
 })
 @Form.create() // 定义修饰器 用Form.create高阶组件出来Login
 class Login extends Component {
-  validator = (rule, value, callback) => {
-    const reg = /^\w+$/
-    // 通过rule.field可以获取当前表单的type
-    const name = rule.field === 'username' ? '用户名' : '密码'
-    if (!value) {
-      callback(`${name}不能为空`);
-    } else if (value.length < 3) {
-      callback(`${name}长度必须大于3位`)
-    } else if (value.length > 15) {
-      callback(`${name}不能大于15位`)
-    } else if (!reg.test(value)) {
-      callback(`${name}只能是数字、字母、下划线的组合`)
-    }
-    callback()
-  }
+
 
   login = (e) => {
     e.preventDefault();
@@ -76,7 +63,7 @@ class Login extends Component {
   }
   render() {
     const { getFieldDecorator } = this.props.form; // 获取 getFieldDecorator 方法 也是高阶函数 ('type',{reuls:[{required:true,message:''}]})(<Componets />)
-    const validator = this.validator;
+    
 
     return (
       <div className='login'>

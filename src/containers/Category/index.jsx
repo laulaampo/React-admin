@@ -127,7 +127,7 @@ class Category extends Component {
           title: `你确定要删除${category.name}分类码`,
           onOk: () => {
             this.props.deleteCategoryAsync(category._id) // 传id 请求参数
-              .then((response) => {
+              .then(() => {
                 message.success('删除成功！')
               })
               .catch((err) => {
@@ -135,7 +135,8 @@ class Category extends Component {
               })
           },
           onCancel: () => {
-            this.CategoryForm.props.form.resetFields();
+            // this.CategoryForm.props.form.resetFields();
+            this.setState({isShow:false})
           }
         }
       )

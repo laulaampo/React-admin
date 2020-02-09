@@ -168,3 +168,38 @@ export const reqUpdateRole = ({ roleId, authName, menus }) => {
     }
   });
 };
+
+// 请求获取用户数据
+export const reqGetUser = () => {
+  return axiosInstance({
+    url: '/user/get',
+    method: 'GET'
+  });
+};
+
+// 请求创建用户数据
+export const reqAddUser = ({ username, password, phone, email, roleId }) => {
+  return axiosInstance({
+    url: '/user/add',
+    method: 'POST',
+    data: { username, password, phone, email, roleId }
+  });
+};
+
+// 请求删除用户数据
+export const reqDeleteUser = username => {
+  return axiosInstance({
+    url: '/user/delete',
+    method: 'POST',
+    data: { username }
+  });
+};
+
+// 请求更新用户数据
+export const reqUpdateUser = (username,password) => {
+  return axiosInstance({
+    url: '/user/update',
+    method: 'POST',
+    data: { username ,password}
+  });
+};
