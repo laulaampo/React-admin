@@ -129,7 +129,7 @@ class User extends Component {
             })
         } else {
           // 修改用户信息
-          const { username, password} = values;
+          const { username, password } = values;
           reqUpdateUser(username, password)
             .then((res) => {
               message.success(`用户“${res.username}”的密码修改成功`)
