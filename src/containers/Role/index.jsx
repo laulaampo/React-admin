@@ -9,7 +9,7 @@ import AddRoleForm from '../Role/add-role-form';
 
 const { Group } = Radio;
 
-@connect(state => ({ roles: state.roles ,user:state.user}), {
+@connect(state => ({ roles: state.roles, user: state.user }), {
   getRoleListAsync,
   addRoleAsync,
   updateRoleAsync
@@ -190,6 +190,7 @@ class Role extends Component {
           Group 包裹 Table。因为 Table 有 Radio 
           这样就能让 Radio 变成单选
         */}
+        {/* 用onChange绑定handleRadioChange 监听选中的用户id*/}
         <Group style={{ width: '100%' }} onChange={this.handleRadioChange}>
           <Table
             columns={this.columns}
@@ -197,7 +198,6 @@ class Role extends Component {
             bordered
             rowKey='_id' // 获取选中对象 则可以获得选中角色的roleId
             loading={isLoading}
-            onChange={this.handleRadioChange} // 收集选中的用户数据
           />
         </Group>
 

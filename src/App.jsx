@@ -35,7 +35,7 @@ class App extends Component {
       filterRoutes = routes.filter(route => {
         return roleMenus.find(item => {
           // 只有符合当前用户权限 以及 product 以及 用户权限开头的路由才能被渲染
-          return route.path === item || (item === 'product' && route.path.startsWith(item));
+          return route.path === item || (item === '/product' && route.path.startsWith(item));
         })
       })
     }

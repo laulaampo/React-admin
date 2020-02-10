@@ -196,7 +196,7 @@ class User extends Component {
         />
 
         <Modal
-          title={crruentUser.username ? '修改用户信息' : '添加用户'}
+          title={crruentUser.username ? '修改用户密码' : '添加用户'}
           visible={isShowModel}
           onOk={this.addUser}
           onCancel={this.switchModal(false, 'isShowModel')}

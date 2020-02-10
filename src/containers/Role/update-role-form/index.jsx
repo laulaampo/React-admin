@@ -18,7 +18,6 @@ class UpdateRoleForm extends Component {
           <TreeNode
             title={<FormattedMessage id={item.title} />} // 显示文字是 menus的titile
             key={item.path}
-            dataRef={item}
           >
           {/* 内部递归调用，直到把所以tree节点都遍历完 */}
             {this.renderTreeNodes(item.children)} 
