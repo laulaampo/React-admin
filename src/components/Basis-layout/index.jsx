@@ -8,6 +8,7 @@ import './index.less';
 import { FormattedMessage } from 'react-intl';
 import img from '../../asset/img/logo.png';
 import withCheckLogin from '../../containers/With-checkLogin/index';
+import ThemePicker from './theme-picker';
 
 
 
@@ -56,6 +57,7 @@ class BasicLayout extends React.Component {
           </Content>
           <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
         </Layout>
+        <ThemePicker />
       </Layout>
     );
   }

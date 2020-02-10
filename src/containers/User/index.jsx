@@ -178,7 +178,6 @@ class User extends Component {
     const { roles } = this.props;
     const { users, isShowModel, isLoading, crruentUser } = this.state;
 
-    console.log(users)
     return (
       <Card
         title={

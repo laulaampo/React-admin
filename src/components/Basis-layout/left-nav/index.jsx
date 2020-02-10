@@ -91,13 +91,14 @@ class LeftNav extends Component {
       // 进入下一次循环
       return pre;
     }, [])
-    console.log(filterMenus)
+
     return (
       <Menu theme="dark" // 默认主题颜色
         defaultSelectedKeys={[pathname]} // 默认选中的菜单
         defaultOpenKeys={[this.findOpenKey(filterMenus, pathname)]} // 初始展开的菜单项
         mode="inline">
-        {this.createMenus(filterMenus)}
+          {/* 使用权限过滤后的数组进行遍历显示 */}
+        {this.createMenus(filterMenus)} 
       </Menu>
     )
   }
